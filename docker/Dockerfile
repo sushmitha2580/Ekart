@@ -4,7 +4,7 @@ ARG REPO_URL=https://github.com/sushmitha2580/Ekart.git
 RUN git clone $REPO_URL /repo
 CMD ["bash"]
 
-FROM maven AS stage2
+FROM maven:amazoncorretto AS stage2
 WORKDIR /build
 COPY --from=stage1 /repo/src /build/src
 COPY --from=stage1 /repo/pom.xml /build/pom.xml
