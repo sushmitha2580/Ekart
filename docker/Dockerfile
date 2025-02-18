@@ -6,7 +6,7 @@ CMD ["bash"]
 
 FROM maven AS stage2
 WORKDIR /build
-COPY --from=stage1 /repo/src/ /build/src/
+COPY --from=stage1 /repo/src /build/src
 COPY --from=stage1 /repo/pom.xml /build/pom.xml
 RUN mvn clean package
 
