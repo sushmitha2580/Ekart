@@ -7,8 +7,8 @@ CMD ["bash"]
 
 FROM maven AS stage2
 WORKDIR /build
-COPY --from=stage1 repo/src/ /build
-COPY --from=stage1 repo/pom.xml /build
+COPY --from=stage1 /repo/src/ /build/src/
+COPY --from=stage1 /repo/pom.xml /build/pom.xml
 RUN mvn clean package
 
 FROM openjdk:8u151-jdk-alpine3.7
@@ -17,8 +17,4 @@ ENV app /usr/src/app
 COPY --from=stage2 /build/target/shopping-cart-0.0.1-SNAPSHOT.jar $app/app.jar
 WORKDIR $app
 ENTRYPOINT exec java -jar app.jar
-~
-~
-~
-~
-~
+
