@@ -1,11 +1,18 @@
+FROM bitnami/git:latest AS stage1
+WORKDIR /Ekart
+ARG REPO_URL=https://github.com/sushmitha2580/Ekart.git
+RUN git clone $REPO_URL /Ekart
+CMD ["bash"]
+
+FROM maven AS stage2
+WORKDIR /build
+COPY --from=stage1 src/ . 
+COPY --from=stage1 pom.xml .
+RUN mvn clean package
+
 FROM openjdk:8u151-jdk-alpine3.7
-
 EXPOSE 8070
-
-ENV APP_HOME /usr/src/app
-
-COPY target/shopping-cart-0.0.1-SNAPSHOT.jar $APP_HOME/app.jar
-
-WORKDIR $APP_HOME
-
+ENV app /usr/src/app
+COPY --from=stage1 /build/target/shopping-cart-0.0.1-SNAPSHOT.jar $app/app.jar
+WORKDIR $app
 ENTRYPOINT exec java -jar app.jar
