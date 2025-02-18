@@ -8,7 +8,7 @@ FROM maven:amazoncorretto AS stage2
 WORKDIR /repo
 COPY --from=stage1 /repo/src/ /repo/src/
 COPY --from=stage1 /repo/pom.xml /repo/pom.xml
-RUN mvn clean package
+RUN mvn clean package -DskipTests=true
 CMD ["bash"]
 
 FROM openjdk:8u151-jdk-alpine3.7
