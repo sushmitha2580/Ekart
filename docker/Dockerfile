@@ -14,7 +14,7 @@ CMD ["bash"]
 FROM openjdk:8u151-jdk-alpine3.7
 EXPOSE 8070
 ENV test /usr/src/app
-COPY --from=stage2 /build/target/shopping-cart-0.0.1-SNAPSHOT.jar $test/app.jar
+COPY --from=stage2 /repo/target/shopping-cart-0.0.1-SNAPSHOT.jar $test/app.jar
 WORKDIR $test
 ENTRYPOINT exec java -jar app.jar
 
