@@ -14,23 +14,24 @@ spec:
     spec:
       containers:
         - name: ekart
-          image: adijaiswal/ekart:latest # Image that will be used to containers in the cluster
+          image: 605134468487.dkr.ecr.ap-south-1.amazonaws.com/demo-repo:java-v3 # Image that will be used to containers in the cluster
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8070 # The port that the container is running on in the cluster
+	  imagePullSecrets:
+      - name: ecr-keysekart
 
 
 ---
 
-apiVersion: v1 # Kubernetes API version
-kind: Service # Kubernetes resource kind we are creating
-metadata: # Metadata of the resource kind we are creating
-  name: ekart-ssvc
+apiVersion: v1
+kind: Service 
+metadata:
+  name: ekart-svc
 spec:
+  type: ClusterIP
   selector:
     app: ekart
   ports:
-    - protocol: "TCP"
-      port: 8070 # The port that the service is running on in the cluster
-      targetPort: 8070 # The port exposed by the service
-  type: LoadBalancer # type of the service.
+  - port: 80 # The port that the service is running on in the cluster
+    targetPort: 8070 # The port exposed by the service
