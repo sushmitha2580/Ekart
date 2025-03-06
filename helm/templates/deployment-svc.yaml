@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ekart
-          image: 605134468487.dkr.ecr.ap-south-1.amazonaws.com/demo-repo:dep-ks1 # Image that will be used to containers in the cluster
+          image: 605134468487.dkr.ecr.ap-south-1.amazonaws.com/demo-repo:javav3 # Image that will be used to containers in the cluster
           imagePullPolicy: IfNotPresent
       imagePullSecrets:
       - name: ecr-keysekart
