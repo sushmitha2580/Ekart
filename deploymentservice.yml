@@ -18,6 +18,7 @@ spec:
       containers:
         - name: ekart
           image: 605134468487.dkr.ecr.ap-south-1.amazonaws.com/demo-repo:java-v3 # Image that will be used to containers in the cluster
+          command: ["/bin/sh","-c","sleep infinity"]
           imagePullPolicy: Always
           ports:
             - containerPort: 8070 # The port that the container is running on in the cluster
