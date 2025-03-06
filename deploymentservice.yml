@@ -12,6 +12,7 @@ spec:
       labels:
         app: ekart
     spec:
+      serviceAccountName: sushmitham
       imagePullSecrets:
         - name: ecr-keysekart
       containers:
